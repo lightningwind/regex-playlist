@@ -2,7 +2,10 @@ const inputs = document.querySelectorAll('input');
 
 // regex patterns
 const patterns = {
-        telephone: /^\d{11}$/
+        telephone: /^\d{11}$/,
+        username: /^[a-zA-Z0-9]{5,12}$/,
+        password: /^[\w@-]{8,20}$/,
+        slug: /^[a-z\d-]{8,20}$/,
 };
 
 // validation function
@@ -19,7 +22,8 @@ function validate(field, regex){
 // attach keyup events to inputs
 inputs.forEach((input) => {
     input.addEventListener('keyup', (e) => {
-            // console.log(patterns[e.target.attributes.name.value]);
-            validate(e.target, patterns[e.target.attributes.name.value]);
+            const inputName = e.target.attributes.name.value;
+            const regex = patterns[inputName];
+            validate(e.target, regex);
     });
 });
